@@ -3,9 +3,10 @@ import ReactActiveItems from './main';
 let id=100;
 class TestItem extends React.Component{
   render(){
-    const {value,text,...props} = this.props;
+    const {value,text,checked,...props} = this.props;
+    console.log(checked);
     return (
-      <div {...props} className="test-item">{value}={text}</div>
+      <div {...props} data-kk={`kk-${checked}`} className="test-item">{value}={text}</div>
     );
   }
 }

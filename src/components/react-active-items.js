@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
 
-const ACTIVE_KEY = '__active__';
+const CHECKED_KEY = 'checked';
 
 export default class ReactActiveItems extends PureComponent{
+  static CHECKED_KEY = CHECKED_KEY;
   static propTypes = {
     className:PropTypes.string,
     type:PropTypes.oneOf([
@@ -32,7 +33,7 @@ export default class ReactActiveItems extends PureComponent{
   static getDefaultState(inProps){
     let {items, value, valueKey, multiple} = inProps;
     items.forEach((item)=>{
-      item[ACTIVE_KEY] = value.indexOf(item[valueKey])>-1;
+      item[CHECKED_KEY] = value.indexOf(item[valueKey])>-1;
     });
     return { items, value };
   }
@@ -56,7 +57,7 @@ export default class ReactActiveItems extends PureComponent{
     const {items} = this.state;
     let value = [];
     items.forEach((item)=>{
-      if(item[ACTIVE_KEY]){
+      if(item[CHECKED_KEY]){
         value.push(item[valueKey]);
       }
     });
@@ -64,32 +65,30 @@ export default class ReactActiveItems extends PureComponent{
   }
 
   getChildren(){
-    //todo: __active__ Can NOT delelte, but CAN NOT use [ACTIVE_KEY] instead.
     const {children} = this.props;
     const {items} = this.state;
     return items.map((item,index)=>{
-      const isActive = item[ACTIVE_KEY];
-      const {__active__,...itemProps} = item;
+      const isActive = item[CHECKED_KEY];
       return React.cloneElement(children, Object.assign({
         key:index,
         onClick:this._onClick.bind(this,item),
-        'data-active':isActive
-      },itemProps));
+        'data-checked':item[CHECKED_KEY]
+      },item));
     });
   }
 
   multipleProcessor(inItem){
     const {items} = this.state;
-    inItem[ACTIVE_KEY] = !inItem[ACTIVE_KEY];
+    inItem[CHECKED_KEY] = !inItem[CHECKED_KEY];
     this.updateState(items);
   }
 
   singleProcessor(inItem){
     const {items} = this.state;
     items.forEach((item)=>{
-      item[ACTIVE_KEY] = false;
+      item[CHECKED_KEY] = false;
     });
-    inItem[ACTIVE_KEY] = true;
+    inItem[CHECKED_KEY] = true;
     this.updateState(items);
   }
 
@@ -97,9 +96,9 @@ export default class ReactActiveItems extends PureComponent{
     const {items} = this.state;
     items.forEach((item)=>{
       if(item === inItem){
-        item[ACTIVE_KEY] = !item[ACTIVE_KEY];
+        item[CHECKED_KEY] = !item[CHECKED_KEY];
       }else{
-        item[ACTIVE_KEY] = false;
+        item[CHECKED_KEY] = false;
       }
     });
     this.updateState(items);
