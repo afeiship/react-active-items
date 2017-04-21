@@ -4,7 +4,6 @@ let id=100;
 class TestItem extends React.Component{
   render(){
     const {value,text,selected,...props} = this.props;
-    console.log(selected);
     return (
       <div {...props} data-kk={`kk-${selected}`} className="test-item">{value}={text}</div>
     );
@@ -12,6 +11,7 @@ class TestItem extends React.Component{
 }
 
 class App extends React.Component{
+  static sV1=[1];
   state = {
     items1:[
       {
@@ -27,6 +27,7 @@ class App extends React.Component{
         text:'AAA'
       }
     ],
+    sV2:[1,4],
     items2:[
       {
         value:1,
@@ -123,7 +124,12 @@ class App extends React.Component{
   }
 
   _change2(inEvent){
-    console.log(inEvent.target.value);
+    let {value} = inEvent.target;
+    if(value.length>3){
+      value = value.slice(0,3);
+    }
+    this.setState({sV2:value});
+    // console.log(inEvent.target.value);
   }
   _change3(inEvent){
     console.log(inEvent.target.value);
@@ -152,14 +158,15 @@ class App extends React.Component{
   }
 
   render(){
+    console.log('re render...')
     return (
       <div className="hello-react-active-items">
         <h4>Single Active Item</h4>
-        <ReactSelectedItems value={[1]} items={this.state.items1} type='single' onChange={this._change1.bind(this)}>
+        <ReactSelectedItems value={App.sV1} items={this.state.items1} type='single' onChange={this._change1.bind(this)}>
           <TestItem />
         </ReactSelectedItems>
         <h4>Multiple Active Item</h4>
-        <ReactSelectedItems value={[1,4]} items={this.state.items2} type='multiple' onChange={this._change2.bind(this)}>
+        <ReactSelectedItems value={this.state.sV2} items={this.state.items2} type='multiple' onChange={this._change2.bind(this)}>
           <TestItem />
         </ReactSelectedItems>
         <h4>Toggle Active Item</h4>

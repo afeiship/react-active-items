@@ -17,6 +17,7 @@ export default class ReactActiveItems extends PureComponent{
     ]),
     items:PropTypes.array,
     value:PropTypes.array,
+    disabled:PropTypes.bool,
     valueKey:PropTypes.string,
     onChange:PropTypes.func,
   };
@@ -25,26 +26,30 @@ export default class ReactActiveItems extends PureComponent{
     type:'single',
     items:[],
     value:[],
+    disabled:false,
     valueKey:'value',
     onChange:noop
   };
 
   static getDefaultState(inProps){
-    let {items, value, valueKey, multiple} = inProps;
+    let {items, value, valueKey, disabled, type} = inProps;
     items.forEach((item)=>{
       item[SELECTED_KEY] = value.indexOf(item[valueKey])>-1;
     });
-    return { items, value };
+    return { items, value, disabled };
   }
 
 
   constructor(props) {
     super(props);
-    this.state = ReactActiveItems.getDefaultState(props);
+    this.state = {
+      disabled:props.disabled,
+      ...ReactActiveItems.getDefaultState(props)
+    };
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.value !== this.state.value || nextProps.items !== this.state.items){
+    if(nextProps !== this.state){
       this.setState(
         ReactActiveItems.getDefaultState(nextProps)
       );
@@ -119,8 +124,8 @@ export default class ReactActiveItems extends PureComponent{
   }
 
   _onClick (inItem){
-    const {multiple,onChange,type} = this.props;
-    this[`${type}Processor`](inItem);
+    const {multiple,onChange,type,disabled} = this.props;
+    !disabled && this[`${type}Processor`](inItem);
   }
 
   render(){
