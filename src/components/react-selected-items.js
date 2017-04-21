@@ -1,13 +1,12 @@
-import './style.scss';
 import React,{PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
 
-const CHECKED_KEY = 'checked';
+const SELECTED_KEY = 'selected';
 
 export default class ReactActiveItems extends PureComponent{
-  static CHECKED_KEY = CHECKED_KEY;
+  static SELECTED_KEY = SELECTED_KEY;
   static propTypes = {
     className:PropTypes.string,
     type:PropTypes.oneOf([
@@ -33,7 +32,7 @@ export default class ReactActiveItems extends PureComponent{
   static getDefaultState(inProps){
     let {items, value, valueKey, multiple} = inProps;
     items.forEach((item)=>{
-      item[CHECKED_KEY] = value.indexOf(item[valueKey])>-1;
+      item[SELECTED_KEY] = value.indexOf(item[valueKey])>-1;
     });
     return { items, value };
   }
@@ -57,7 +56,7 @@ export default class ReactActiveItems extends PureComponent{
     const {items} = this.state;
     let value = [];
     items.forEach((item)=>{
-      if(item[CHECKED_KEY]){
+      if(item[SELECTED_KEY]){
         value.push(item[valueKey]);
       }
     });
@@ -68,27 +67,27 @@ export default class ReactActiveItems extends PureComponent{
     const {children} = this.props;
     const {items} = this.state;
     return items.map((item,index)=>{
-      const isActive = item[CHECKED_KEY];
+      const isActive = item[SELECTED_KEY];
       return React.cloneElement(children, Object.assign({
         key:index,
         onClick:this._onClick.bind(this,item),
-        'data-checked':item[CHECKED_KEY]
+        'data-selected':item[SELECTED_KEY]
       },item));
     });
   }
 
   multipleProcessor(inItem){
     const {items} = this.state;
-    inItem[CHECKED_KEY] = !inItem[CHECKED_KEY];
+    inItem[SELECTED_KEY] = !inItem[SELECTED_KEY];
     this.updateState(items);
   }
 
   singleProcessor(inItem){
     const {items} = this.state;
     items.forEach((item)=>{
-      item[CHECKED_KEY] = false;
+      item[SELECTED_KEY] = false;
     });
-    inItem[CHECKED_KEY] = true;
+    inItem[SELECTED_KEY] = true;
     this.updateState(items);
   }
 
@@ -96,9 +95,9 @@ export default class ReactActiveItems extends PureComponent{
     const {items} = this.state;
     items.forEach((item)=>{
       if(item === inItem){
-        item[CHECKED_KEY] = !item[CHECKED_KEY];
+        item[SELECTED_KEY] = !item[SELECTED_KEY];
       }else{
-        item[CHECKED_KEY] = false;
+        item[SELECTED_KEY] = false;
       }
     });
     this.updateState(items);

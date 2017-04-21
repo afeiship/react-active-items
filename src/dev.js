@@ -1,12 +1,12 @@
 import './dev.scss';
-import ReactActiveItems from './main';
+import ReactSelectedItems from './main';
 let id=100;
 class TestItem extends React.Component{
   render(){
-    const {value,text,checked,...props} = this.props;
-    console.log(checked);
+    const {value,text,selected,...props} = this.props;
+    console.log(selected);
     return (
-      <div {...props} data-kk={`kk-${checked}`} className="test-item">{value}={text}</div>
+      <div {...props} data-kk={`kk-${selected}`} className="test-item">{value}={text}</div>
     );
   }
 }
@@ -155,27 +155,27 @@ class App extends React.Component{
     return (
       <div className="hello-react-active-items">
         <h4>Single Active Item</h4>
-        <ReactActiveItems value={[1]} items={this.state.items1} type='single' onChange={this._change1.bind(this)}>
+        <ReactSelectedItems value={[1]} items={this.state.items1} type='single' onChange={this._change1.bind(this)}>
           <TestItem />
-        </ReactActiveItems>
+        </ReactSelectedItems>
         <h4>Multiple Active Item</h4>
-        <ReactActiveItems value={[1,4]} items={this.state.items2} type='multiple' onChange={this._change2.bind(this)}>
+        <ReactSelectedItems value={[1,4]} items={this.state.items2} type='multiple' onChange={this._change2.bind(this)}>
           <TestItem />
-        </ReactActiveItems>
+        </ReactSelectedItems>
         <h4>Toggle Active Item</h4>
-        <ReactActiveItems value={[2]} items={this.state.items3} type='toggle' onChange={this._change3.bind(this)}>
+        <ReactSelectedItems value={[2]} items={this.state.items3} type='toggle' onChange={this._change3.bind(this)}>
           <TestItem />
-        </ReactActiveItems>
+        </ReactSelectedItems>
         <h4>Other Active Item</h4>
-        <ReactActiveItems value={this.state.d4Value} items={this.state.items4} type='other' onChange={this._change4.bind(this)}>
+        <ReactSelectedItems value={this.state.d4Value} items={this.state.items4} type='other' onChange={this._change4.bind(this)}>
           <TestItem />
-        </ReactActiveItems>
+        </ReactSelectedItems>
 
         <h4>Dynamic value/items</h4>
         <button onClick={this._click1.bind(this)}>Dynamic Set value & items</button>
-        <ReactActiveItems value={this.state.dValue} items={this.state.dItems} type='multiple' onChange={this._change5.bind(this)}>
+        <ReactSelectedItems value={this.state.dValue} items={this.state.dItems} type='multiple' onChange={this._change5.bind(this)}>
           <TestItem />
-        </ReactActiveItems>
+        </ReactSelectedItems>
     </div>
     );
   }

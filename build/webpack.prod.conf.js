@@ -9,8 +9,8 @@ base.entry = {
 base.output = {
   path: config.build.assetsRoot,
   publicPath: config.build.assetsPublicPath,
-  filename: 'react-active-items.js',
-  library: 'ReactActiveItems',
+  filename: 'react-selected-items.js',
+  library: 'ReactSelectedItems',
   libraryTarget: 'umd'
 }
 

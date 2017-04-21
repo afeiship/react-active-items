@@ -1,29 +1,29 @@
 {
-  "name": "react-active-items",
+  "name": "react-selected-items",
   "version": "0.1.0",
-  "description": "React component for active items.",
+  "description": "React component for selected items.",
   "author": "afeiship <1290657123@qq.com>",
   "keywords": [
     "components",
-    "react-active-items",
+    "react-selected-items",
     "ui",
     "theme"
   ],
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afeiship/react-active-items.git"
+    "url": "git+https://github.com/afeiship/react-selected-items.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/afeiship/react-active-items/issues"
+    "url": "https://github.com/afeiship/react-selected-items/issues"
   },
-  "homepage": "https://github.com/afeiship/react-active-items",
+  "homepage": "https://github.com/afeiship/react-selected-items",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
-  "main": "./dist/react-active-items.js",
+  "main": "./dist/react-selected-items.js",
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "autoprefixer-loader": "^3.2.0",

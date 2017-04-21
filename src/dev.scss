@@ -39,12 +39,13 @@ ul, li {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
+    color:#000;
 
-    &[data-checked=false] {
+    &[data-selected=false] {
       background-color: #ccc;
     }
 
-    &[data-checked=true] {
+    &[data-selected=true] {
       background-color: #f60;
     }
   }
