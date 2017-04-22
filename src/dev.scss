@@ -9,7 +9,7 @@ ul, li {
 
 .hello-react-active-items {
   color: #F00;
-  padding: 0 20px;
+  padding: 20px;
   position: relative;
 
   button {
@@ -29,17 +29,22 @@ ul, li {
     &:focus {
       outline: none;
     }
+
+
+    &[disabled]{
+      opacity: 0.5;
+    }
   }
 
-  .blank-20{
-    height:20px;
+  .blank-20 {
+    height: 20px;
   }
 
   .test-item {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
-    color:#000;
+    color: #000;
 
     &[data-selected=false] {
       background-color: #ccc;
@@ -47,6 +52,7 @@ ul, li {
 
     &[data-selected=true] {
       background-color: #f60;
+      color: #fff;
     }
   }
 
