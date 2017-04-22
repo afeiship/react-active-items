@@ -5,6 +5,7 @@ let id = 100;
 export default class extends React.PureComponent {
   state = {
     disabled: false,
+    value: [2, 3],
     items: [
       {
         value: 1,
@@ -31,9 +32,10 @@ export default class extends React.PureComponent {
 
   _change(inEvent) {
     const value = inEvent.target.value;
-    if (value.length > 3) {
-      this.setState({disabled: true});
-    }
+    // if (value.length >= 3) {
+    //   this.setState({disabled: true});
+    // }
+    console.log(value);
   }
 
   _click1() {
@@ -52,7 +54,18 @@ export default class extends React.PureComponent {
   }
 
   _click3() {
-    console.log(this);
+    // console.log(this);
+    let r1 = Math.floor((Math.random()) * 5) || 1;
+    let r2 = Math.floor((Math.random()) * 5) || 1;
+    let value = [];
+
+    console.log([r1, r2]);
+    if (r1 == r2) {
+      value = [r1];
+    } else {
+      value = [r1, r2];
+    }
+    this.setState({value})
   }
 
   render() {
@@ -60,7 +73,8 @@ export default class extends React.PureComponent {
       <div className="dy-example">
         <button onClick={this._click1.bind(this)}>Toggle disabled ->{String(this.state.disabled)}</button>
         <button onClick={this._click2.bind(this)}>Append items ->{String(this.state.items.length)}</button>
-        <ReactSelectedItems defaultValue={[2, 3]} disabled={this.state.disabled} items={this.state.items}
+        <button onClick={this._click3.bind(this)}>Random Value</button>
+        <ReactSelectedItems value={this.state.value} disabled={this.state.disabled} items={this.state.items}
                             type='multiple'
                             onChange={this._change.bind(this)}>
           <Test1Item />

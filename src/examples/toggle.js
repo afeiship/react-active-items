@@ -26,7 +26,7 @@ export default class extends React.PureComponent {
 
   render() {
     return (
-      <ReactSelectedItems defaultValue={[3]} items={this.state.items} type='toggle'
+      <ReactSelectedItems value={[3]} items={this.state.items} type='toggle'
                           onChange={this._change.bind(this)}>
         <Test1Item />
       </ReactSelectedItems>

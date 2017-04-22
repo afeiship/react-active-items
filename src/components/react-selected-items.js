@@ -15,7 +15,6 @@ export default class extends PureComponent {
       'other'
     ]),
     items: PropTypes.array,
-    defaultValue: PropTypes.array,
     value: PropTypes.array,
     disabled: PropTypes.bool,
     valueKey: PropTypes.string,
@@ -31,24 +30,31 @@ export default class extends PureComponent {
     onChange: noop
   };
 
-
   constructor(props) {
     super(props);
-    this.state = this.getDefaultState(this.props);
+    this.state = {
+      disabled: props.disabled,
+      ...this.getDefaultState(this.props, props.value)
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps !== this.state) {
-      this.setState(this.getDefaultState(nextProps));
+      if (nextProps.value !== this.state.value) {
+        this.setState(this.getDefaultState(nextProps, nextProps.value));
+      } else {
+        this.setState(this.getDefaultState(nextProps));
+      }
     }
   }
 
-  getDefaultState(inProps) {
-    let {items, defaultValue, valueKey, disabled} = inProps;
+  getDefaultState(inProps, inValue) {
+    const value = inValue || this.getValue();
+    let {items, disabled, valueKey} = inProps;
     items.forEach((item) => {
-      item[SELECTED_KEY] = defaultValue.indexOf(item[valueKey]) > -1;
+      item[SELECTED_KEY] = value.indexOf(item[valueKey]) > -1;
     });
-    return {items, disabled};
+    return {items, disabled, value};
   }
 
   getValue() {
@@ -67,9 +73,9 @@ export default class extends PureComponent {
     const {children} = this.props;
     const {items} = this.state;
     return items.map((item, index) => {
-      const isActive = item[SELECTED_KEY];
       return React.cloneElement(children, Object.assign({
         key: index,
+        disabled: this.state.disabled,
         onClick: this._onClick.bind(this, item),
         'data-selected': item[SELECTED_KEY]
       }, item));
