@@ -57,6 +57,7 @@ export default class extends PureComponent {
     this.setState({items: items.slice(0)})
   }
 
+
   getItems() {
     return Children.map(this.props.children, (elem) => {
       return {...elem.props};
@@ -73,6 +74,14 @@ export default class extends PureComponent {
 
   _onClick(inItem) {
     this[this.props.type](inItem);
+  }
+
+  __updateItems(inItems) {
+    const {onChange} = this.props;
+    const items = inItems.slice(0);
+    this.setState({items}, () => {
+      onChange(items);
+    });
   }
 
   render() {
