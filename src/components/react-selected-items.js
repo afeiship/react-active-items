@@ -11,7 +11,7 @@ export default class extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     onChange: PropTypes.func,
-    type: PropTypes.string,
+    type: PropTypes.oneOf(['toggle', 'radio', 'checkbox']),
   };
 
   static defaultProps = {
