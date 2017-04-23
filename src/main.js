@@ -1,2 +1,7 @@
 import ReactSelectedItems from 'components/react-selected-items';
-export default ReactSelectedItems;
+import ReactSelectedItem from 'components/react-selected-item';
+
+module.exports = {
+  ReactSelectedItems,
+  ReactSelectedItem
+};

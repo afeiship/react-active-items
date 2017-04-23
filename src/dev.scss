@@ -30,10 +30,15 @@ ul, li {
       outline: none;
     }
 
-
-    &[disabled]{
+    &[disabled] {
       opacity: 0.5;
     }
+  }
+
+  select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
   }
 
   .blank-20 {
