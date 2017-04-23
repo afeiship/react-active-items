@@ -35,7 +35,8 @@ export default class extends React.PureComponent {
     // if (value.length >= 3) {
     //   this.setState({disabled: true});
     // }
-    console.log(value);
+    // console.log(value);
+    this.setState({value})
   }
 
   _click1() {

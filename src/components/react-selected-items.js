@@ -32,24 +32,17 @@ export default class extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      disabled: props.disabled,
-      ...this.getDefaultState(this.props, props.value)
-    };
+    this.state = this.getDefaultState(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps !== this.state) {
-      if (nextProps.value !== this.state.value) {
-        this.setState(this.getDefaultState(nextProps, nextProps.value));
-      } else {
-        this.setState(this.getDefaultState(nextProps));
-      }
+      this.setState(this.getDefaultState(nextProps));
     }
   }
 
-  getDefaultState(inProps, inValue) {
-    const value = inValue || this.getValue();
+  getDefaultState(inProps) {
+    const value = inProps.value || this.getValue();
     let {items, disabled, valueKey} = inProps;
     items.forEach((item) => {
       item[SELECTED_KEY] = value.indexOf(item[valueKey]) > -1;
@@ -91,9 +84,8 @@ export default class extends PureComponent {
   singleProcessor(inItem) {
     const {items} = this.state;
     items.forEach((item) => {
-      item[SELECTED_KEY] = false;
+      item[SELECTED_KEY] = item === inItem;
     });
-    inItem[SELECTED_KEY] = true;
     this.updateState(items);
   }
 
@@ -118,8 +110,8 @@ export default class extends PureComponent {
     const {onChange}  = this.props;
     this.setState({items: inItems.slice(0)}, () => {
       const value = this.getValue();
-      onChange({
-        target: {value}
+      this.setState({value}, () => {
+        onChange({target: {value}});
       });
     });
   }
