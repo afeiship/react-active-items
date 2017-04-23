@@ -28,6 +28,10 @@ export default class extends React.PureComponent {
     this.setState({type: inEvent.target.value})
   }
 
+  _change1(inEvent){
+    console.log(inEvent.target.value);
+  }
+
   render() {
 
     return (
@@ -40,7 +44,7 @@ export default class extends React.PureComponent {
 
         <div className="blank-20" />
 
-        <ReactSelectedItems type={this.state.type}>
+        <ReactSelectedItems onChange={this._change1.bind(this)} type={this.state.type}>
           {
             this.state.items.map((item, key) => {
               return <ReactSelectedItem key={key} selected={item.selected} className="test-item"

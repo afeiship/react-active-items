@@ -36,13 +36,13 @@ export default class extends PureComponent {
         item[SELECTED_KEY] = false;
       }
     });
-    this.setState({items: items.slice(0)})
+    this.__updateItems(items);
   }
 
   checkbox(inItem) {
     let {items} = this.state;
     inItem[SELECTED_KEY] = !inItem[SELECTED_KEY];
-    this.setState({items: items.slice(0)})
+    this.__updateItems(items);
   }
 
   toggle(inItem) {
@@ -54,7 +54,7 @@ export default class extends PureComponent {
         item[SELECTED_KEY] = false;
       }
     });
-    this.setState({items: items.slice(0)})
+    this.__updateItems(items);
   }
 
 
@@ -80,7 +80,7 @@ export default class extends PureComponent {
     const {onChange} = this.props;
     const items = inItems.slice(0);
     this.setState({items}, () => {
-      onChange(items);
+      onChange({ target:{value:items} });
     });
   }
 
