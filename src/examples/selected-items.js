@@ -47,7 +47,7 @@ export default class extends React.PureComponent {
         <ReactSelectedItems onChange={this._change1.bind(this)} type={this.state.type}>
           {
             this.state.items.map((item, key) => {
-              return <ReactSelectedItem key={key} selected={item.selected} className="test-item"
+              return <ReactSelectedItem data={item} key={key} selected={item.selected} className="test-item"
                                         nodeName="div" value={item.id}>{item.text}</ReactSelectedItem>;
             })
           }

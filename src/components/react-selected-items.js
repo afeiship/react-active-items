@@ -76,11 +76,19 @@ export default class extends PureComponent {
     this[this.props.type](inItem);
   }
 
+  __getData(inItems) {
+    return inItems.map((item) => {
+      return Object.assign(item.data, {
+        [SELECTED_KEY]: item[SELECTED_KEY]
+      });
+    });
+  }
+
   __updateItems(inItems) {
     const {onChange} = this.props;
     const items = inItems.slice(0);
     this.setState({items}, () => {
-      onChange({ target:{value:items} });
+      onChange({target: {value: this.__getData(items)}});
     });
   }
 
