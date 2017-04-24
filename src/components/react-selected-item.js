@@ -16,7 +16,7 @@ export default class extends React.PureComponent {
   };
 
   getChildren() {
-    const {nodeName, className, selected, ...props} = this.props;
+    const {nodeName, className, selected, data, ...props} = this.props;
     const cls = classNames('react-selected-item', className);
     const targetProps = Object.assign({
       className: cls,
