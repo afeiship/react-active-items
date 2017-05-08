@@ -27,6 +27,14 @@ export default class extends PureComponent {
     };
   }
 
+  get children() {
+    const {items} = this.state;
+    return items.map((item, index) => {
+      item.onClick = this._onClick.bind(this, item);
+      return cloneElement(this.props.children[index], item);
+    });
+  }
+
   componentWillReceiveProps(nextProps){
     if(nextProps!==this.props){
       this.setState({
@@ -72,14 +80,6 @@ export default class extends PureComponent {
     });
   }
 
-  getChildren() {
-    const {items} = this.state;
-    return items.map((item, index) => {
-      item.onClick = this._onClick.bind(this, item);
-      return cloneElement(this.props.children[index], item);
-    });
-  }
-
   _onClick(inItem) {
     this[this.props.type](inItem);
   }
@@ -104,7 +104,7 @@ export default class extends PureComponent {
     const {className, ...props} = this.props;
     return (
       <div {...props} className={classNames('react-active-items', className)}>
-        {this.getChildren()}
+        {this.children}
       </div>
     );
   }

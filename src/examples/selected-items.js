@@ -31,11 +31,11 @@ export default class extends React.PureComponent {
   }
 
   _change1(inEvent){
-    // this.setState({items: inEvent.target.value.slice(0)})
+    this.setState({items: inEvent.target.value.slice(0)})
     // console.log(inEvent.target.value);
-    const item = inEvent.target.value.filter(item=>item.selected);
+    // const item = inEvent.target.value.filter(item=>item.selected);
     // console.log(item);
-    this.setState({selectedItem:item[0]});
+    // this.setState({selectedItem:item[0]});
   }
 
   render() {
@@ -46,13 +46,6 @@ export default class extends React.PureComponent {
           <option value="radio">Radio</option>
           <option value="checkbox">Checkbox</option>
         </select>
-
-        <div className="blank-20" />
-
-
-        <ReactSelectedItem className='test-item' selected={this.state.selectedItem.selected}>
-          {JSON.stringify(this.state.selectedItem)} => {String(this.state.selectedItem.selected)}
-        </ReactSelectedItem>
 
         <div className="blank-20" />
 

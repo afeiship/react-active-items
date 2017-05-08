@@ -14,7 +14,7 @@ export default class extends React.PureComponent {
     selected: false,
   };
 
-  getChildren() {
+  get children() {
     const {nodeName, className, selected, data, ...props} = this.props;
     const cls = classNames('react-selected-item', className);
     const targetProps = Object.assign({
@@ -25,7 +25,7 @@ export default class extends React.PureComponent {
   }
 
   render() {
-    return this.getChildren();
+    return this.children;
   }
 
 }
