@@ -2,6 +2,7 @@ import {ReactSelectedItem, ReactSelectedItems} from '../main';
 export default class extends React.PureComponent {
   state = {
     type: 'toggle',
+    selectedItem:{},
     items: [
       {
         id: 1,
@@ -25,16 +26,19 @@ export default class extends React.PureComponent {
   };
 
   _change(inEvent) {
-    console.log(inEvent.target.value);
-    this.setState({type: inEvent.target.value})
+    this.setState({type:inEvent.target.value})
+    // this.setState({itetypems: inEvent.target.value.slice(0)})
   }
 
   _change1(inEvent){
-    console.log(inEvent.target.value);
+    // this.setState({items: inEvent.target.value.slice(0)})
+    // console.log(inEvent.target.value);
+    const item = inEvent.target.value.filter(item=>item.selected);
+    // console.log(item);
+    this.setState({selectedItem:item[0]});
   }
 
   render() {
-
     return (
       <div className="example-react-selcted-items">
         <select value={this.state.type} onChange={this._change.bind(this)}>
@@ -45,11 +49,18 @@ export default class extends React.PureComponent {
 
         <div className="blank-20" />
 
+
+        <ReactSelectedItem className='test-item' selected={this.state.selectedItem.selected}>
+          {JSON.stringify(this.state.selectedItem)} => {String(this.state.selectedItem.selected)}
+        </ReactSelectedItem>
+
+        <div className="blank-20" />
+
         <ReactSelectedItems onChange={this._change1.bind(this)} type={this.state.type}>
           {
             this.state.items.map((item, key) => {
               return <ReactSelectedItem data={item} disabled={item.disabled} key={key} selected={item.selected} className="test-item"
-                                        nodeName="div" value={item.id}>{item.text}</ReactSelectedItem>;
+                                        value={item.id}>{item.text} => {String(!!item.selected)}</ReactSelectedItem>;
             })
           }
         </ReactSelectedItems>

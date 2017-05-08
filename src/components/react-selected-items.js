@@ -1,10 +1,10 @@
-import React, {PureComponent, Children} from 'react';
-import {createElement, cloneElement} from 'react';
+import React, {Children, PureComponent} from 'react';
+import {cloneElement, createElement} from 'react';
+
 import PropTypes from 'prop-types';
+import {SELECTED_KEY} from './const';
 import classNames from 'classnames';
 import noop from 'noop';
-
-import {SELECTED_KEY} from './const';
 
 export default class extends PureComponent {
 
@@ -23,8 +23,16 @@ export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      items: this.getItems()
+      items: this.getItems(props)
     };
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps!==this.props){
+      this.setState({
+        items:this.getItems(nextProps)
+      });
+    }
   }
 
   radio(inItem) {
@@ -58,8 +66,8 @@ export default class extends PureComponent {
   }
 
 
-  getItems() {
-    return Children.map(this.props.children, (elem) => {
+  getItems(inProps) {
+    return Children.map(inProps.children, (elem) => {
       return {...elem.props};
     });
   }
