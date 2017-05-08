@@ -17,12 +17,13 @@ export default class extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {
-      selected:props.selected
+      selected:props.selected,
+      disabled:props.disabled
     };
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if (nextProps.selected !== this.props.selected) {
+    if (nextProps !== this.props) {
       this.setState(nextProps);
     }
   }
@@ -32,6 +33,7 @@ export default class extends React.PureComponent {
     const cls = classNames('react-selected-item', className);
     const targetProps = Object.assign({
       className: cls,
+      disabled:this.state.disabled,
       'data-selected': this.state.selected
     }, props);
     return createElement(nodeName, targetProps);
