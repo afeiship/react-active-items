@@ -1,7 +1,6 @@
-import {createElement} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import {createElement} from 'react';
 
 export default class extends React.PureComponent {
 
@@ -15,18 +14,31 @@ export default class extends React.PureComponent {
     selected: false,
   };
 
-  getChildren() {
+  constructor(props){
+    super(props);
+    this.state = {
+      selected:props.selected
+    };
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.selected !== this.props.selected) {
+      this.setState(nextProps);
+    }
+  }
+
+  get children() {
     const {nodeName, className, selected, data, ...props} = this.props;
     const cls = classNames('react-selected-item', className);
     const targetProps = Object.assign({
       className: cls,
-      'data-selected': selected
+      'data-selected': this.state.selected
     }, props);
     return createElement(nodeName, targetProps);
   }
 
   render() {
-    return this.getChildren();
+    return this.children;
   }
 
 }
