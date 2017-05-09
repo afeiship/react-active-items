@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {SELECTED_KEY} from './const';
 import classNames from 'classnames';
 import noop from 'noop';
+import objectAssign from 'object-assign';
 
 export default class extends PureComponent {
 
@@ -86,7 +87,7 @@ export default class extends PureComponent {
 
   __getData(inItems) {
     return inItems.map((item) => {
-      return Object.assign(item.data, {
+      return objectAssign(item.data, {
         [SELECTED_KEY]: item[SELECTED_KEY]
       });
     });
