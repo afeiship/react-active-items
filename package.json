@@ -81,6 +81,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "noop": "github:afeiship/noop",
+    "object-assign": "^4.1.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-prop-types": "^0.4.0"
