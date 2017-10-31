@@ -12,7 +12,7 @@ export default class extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     onChange: PropTypes.func,
-    type: PropTypes.oneOf(['toggle', 'radio', 'checkbox']),
+    type: PropTypes.oneOf(['toggle', 'radio', 'checkbox','other']),
   };
 
   static defaultProps = {
@@ -72,6 +72,9 @@ export default class extends PureComponent {
       }
     });
     this.__updateItems(items);
+  }
+
+  other(){
   }
 
 
