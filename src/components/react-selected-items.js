@@ -75,6 +75,7 @@ export default class extends PureComponent {
   }
 
   other(){
+    this.__updateItems(items);
   }
 
 
