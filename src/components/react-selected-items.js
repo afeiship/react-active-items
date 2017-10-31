@@ -101,10 +101,11 @@ export default class extends PureComponent {
   __updateItems(inItem, inItems) {
     const {onChange} = this.props;
     const items = inItems.slice(0);
+
     this.setState({items}, () => {
       onChange({
         target: {
-          active: inItem,
+          active: inItem.data,
           value: this.__getData(items)
         }
       });
