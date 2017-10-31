@@ -31,6 +31,7 @@ export default class extends React.PureComponent {
   }
 
   _change1(inEvent){
+    console.log('other？');
     this.setState({items: inEvent.target.value.slice(0)})
     // console.log(inEvent.target.value);
     // const item = inEvent.target.value.filter(item=>item.selected);
@@ -45,6 +46,7 @@ export default class extends React.PureComponent {
           <option value="toggle">Toggle</option>
           <option value="radio">Radio</option>
           <option value="checkbox">Checkbox</option>
+          <option value="other">Other</option>
         </select>
 
         <div className="blank-20" />

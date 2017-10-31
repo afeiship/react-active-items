@@ -74,7 +74,8 @@ export default class extends PureComponent {
     this.__updateItems(items);
   }
 
-  other(){
+  other(inItem){
+    const {items} = this.state;
     this.__updateItems(items);
   }
 
