@@ -53,13 +53,13 @@ export default class extends PureComponent {
         item[SELECTED_KEY] = false;
       }
     });
-    this.__updateItems(items);
+    this.__updateItems(inItem, items);
   }
 
   checkbox(inItem) {
     let {items} = this.state;
     inItem[SELECTED_KEY] = !inItem[SELECTED_KEY];
-    this.__updateItems(items);
+    this.__updateItems(inItem, items);
   }
 
   toggle(inItem) {
@@ -71,12 +71,12 @@ export default class extends PureComponent {
         item[SELECTED_KEY] = false;
       }
     });
-    this.__updateItems(items);
+    this.__updateItems(inItem, items);
   }
 
   other(inItem){
     const {items} = this.state;
-    this.__updateItems(items);
+    this.__updateItems(inItem, items);
   }
 
 
@@ -98,11 +98,11 @@ export default class extends PureComponent {
     });
   }
 
-  __updateItems(inItems) {
+  __updateItems(inItem, inItems) {
     const {onChange} = this.props;
     const items = inItems.slice(0);
     this.setState({items}, () => {
-      onChange({target: {value: this.__getData(items)}});
+      onChange({target: {active: inItem, value: this.__getData(items)}});
     });
   }
 
